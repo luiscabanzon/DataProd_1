@@ -9,7 +9,7 @@ Data Product Prototype: Anti-vice Savings Calculator
 The purpose of this "experiment" is to highlight how much money we can spend (or save) because of our vices.
 In this case I have made more emphasis on tobacco, although this can be used with other things (beers, partying, unnecesary expenses...).
 
-Bear in mind that sometimes vices not only take away our money... but also our health. According to a paper from the Univerity of California, Berkeley (April 2000) each cigarette decrease our life expectancy 11 minutes. It is up to you.
+Bear in mind that sometimes vices not only take away our money... but also our health. According to a paper from the Univerity of California, Berkeley (April 2000) each cigarette decrease our life expectancy 11 minutes. It is up to you, my data scientist fellow ;).
 
 
 How to use this calculator
@@ -21,19 +21,24 @@ The calculator has 4 boxes to fill:
 - How much is each packet?
 - Chose a period to find out how much you will save during it.
 
+Press "Submit"" to get the output.
 
-
-How to use this calculator (2)
+The output figures
 ========================================================
-
-After pressing "Submit", the output will return 5 figures:
-
 - Savings per day.
-- Chosen period in days.
+- Chosen period by days.
 - Total savings.
 - All the cigarettes not smoked during this period.
-- The potential improvement of your life expectancy, in years.
+- The potential improvement of your life expectancy by years. For instance, a daily consumption of 10 cigarettes during 10 years would be an impact of:
 
+```r
+# Daily cigarettes * days * 11min
+10* 3650 * (11/(60*24)/365)
+```
+
+```
+[1] 0.7638889
+```
 
 Hope you like it!
 ========================================================
@@ -43,3 +48,4 @@ http://luiscabanzon.shinyapps.io/Shiny_1
 
 Please also find the code on the following GitHub repository:
 https://github.com/luiscabanzon/DataProd_1
+

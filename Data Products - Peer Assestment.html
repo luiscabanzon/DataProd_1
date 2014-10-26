@@ -797,7 +797,7 @@ hljs.initHighlightingOnLoad();
 <p>The purpose of this &ldquo;experiment&rdquo; is to highlight how much money we can spend (or save) because of our vices.
 In this case I have made more emphasis on tobacco, although this can be used with other things (beers, partying, unnecesary expenses&hellip;).</p>
 
-<p>Bear in mind that sometimes vices not only take away our money&hellip; but also our health. According to a paper from the Univerity of California, Berkeley (April 2000) each cigarette decrease our life expectancy 11 minutes. It is up to you.</p>
+<p>Bear in mind that sometimes vices not only take away our money&hellip; but also our health. According to a paper from the Univerity of California, Berkeley (April 2000) each cigarette decrease our life expectancy 11 minutes. It is up to you, my data scientist fellow ;).</p>
 
 </div>
 
@@ -814,21 +814,28 @@ In this case I have made more emphasis on tobacco, although this can be used wit
 <li>Chose a period to find out how much you will save during it.</li>
 </ul>
 
+<p>Press &ldquo;Submit&rdquo;&ldquo; to get the output.</p>
+
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>How to use this calculator (2)</h3>
+<h3>The output figures</h3>
 <div class="slideContent" >
-<p>After pressing &ldquo;Submit&rdquo;, the output will return 5 figures:</p>
-
 <ul>
 <li>Savings per day.</li>
-<li>Chosen period in days.</li>
+<li>Chosen period by days.</li>
 <li>Total savings.</li>
 <li>All the cigarettes not smoked during this period.</li>
-<li>The potential improvement of your life expectancy, in years.</li>
+<li>The potential improvement of your life expectancy by years. For instance, a daily consumption of 10 cigarettes during 10 years would be an impact of:</li>
 </ul>
+
+<pre><code class="r"># Daily cigarettes * days * 11min
+10* 3650 * (11/(60*24)/365)
+</code></pre>
+
+<pre><code>[1] 0.7638889
+</code></pre>
 
 </div>
 
