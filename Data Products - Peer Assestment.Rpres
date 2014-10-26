@@ -1,0 +1,76 @@
+Data Products - Peer Assestment
+========================================================
+author: Luis Cabanzon
+date: 26/Oct/2014
+
+Data Product Prototype: Anti-vice Savings Calculator
+========================================================
+
+The purpose of this "experiment" is to highlight how much money we can spend (or save) because of our vices.
+In this case I have made more emphasis on tobacco, but this can be used in other topics (beers, partying, unnecesary expenses...).
+
+You can find the online application on the following url:
+http://luiscabanzon.shinyapps.io/Shiny_1
+
+
+How to use this calculator
+========================================================
+The calculator has 4 boxes to fill:
+
+- How many cigarettes do you smoke daily?
+- How many cigarettes have the packets you buy?
+- How much is each packet?
+- Chose a period to find out how much you will save during it.
+
+After pressing "Submit", the output will return 5 figures:
+
+- Savings per day.
+- Chosen period in days.
+- Total savings.
+- All the cigarettes not smoked during this period.
+- The potential improvement of your life expectancy, in years.
+
+Code: ui.R
+========================================================
+```{r, eval=FALSE}
+shinyUI(
+        pageWithSidebar("Want to be richer (and healthier)? Then stop smoking! *"),
+        # INPUT PANEL
+        sidebarPanel(
+                h5("Make a quick estimation about how much money you can save."),
+                numericInput('cig_day', 'How many cigerettes do you smoke daily?', 0, min = 0, max = 100, step = 1),
+                numericInput('cig_pac', 'How many cigarettes you per packet?', 0, min = 0, max = 100, step = 1),
+                numericInput('pac_pri', 'How much is each packet?', 0, min = 0, max = 100000, step = 0.05),
+                selectInput('period', 'Select a period:',
+                            c('2 weeks' = 14, '3 months' = 90, '1 year' = 365, '5 years' = 1825, '10 years' = 3650)), submitButton('Submit')
+        ),
+        # OUTPUT PANEL
+        mainPanel(
+               h4('Savings per day:'), verbatimTextOutput('day_save'),
+               h4('So during these days:'), verbatimTextOutput('days'),
+               h4('You will have saved:'), verbatimTextOutput('total_save'),
+               h4('And by avoiding smoking all these cigarretes:'), verbatimTextOutput('no_cig'),
+               h4('You will have increased your life expectancy (in years): **'), verbatimTextOutput('life'),
+               h5("* If you don't' smoke, try to apply this to any other vice (Starbucks, McDonnald's...)."),
+               h5("** The life expectancy improvement is just a rough estimation, according to a publication from April 2000 by the University of California, Berkeley."), a( "(Reference found here)", href = "http://www.medicalnewstoday.com/releases/9703.php")
+               )))
+```
+
+
+Code: server.R
+========================================================
+```{r, eval=FALSE}
+f_day_save <- function(pac_pri , cig_pac , cig_day) (pac_pri / cig_pac) * cig_day
+f_total_save <- function(pac_pri , cig_pac , cig_day , period) (pac_pri / cig_pac) * cig_day * as.numeric(period)
+f_no_cig <- function(cig_day , period) cig_day * as.numeric(period)
+f_life <- function(cig_day , period) cig_day * as.numeric(period) * (11/(60*24)/365)
+
+shinyServer(
+        function(input, output) {        
+                output$day_save <- renderPrint({f_day_save(input$pac_pri, input$cig_pac ,input$cig_day)})
+                output$days <- renderPrint({input$period})
+                output$total_save <- renderPrint({f_total_save(input$pac_pri, input$cig_pac, input$cig_day, input$period)})
+                output$no_cig <- renderPrint({f_no_cig(input$cig_day , input$period)})
+                output$life <- renderPrint({f_life(input$cig_day , input$period)})        
+        })
+```
