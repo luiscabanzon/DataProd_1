@@ -1,7 +1,7 @@
 Data Products - Peer Assestment
 ========================================================
 author: Luis Cabanzon
-date: 26/Oct/2014
+date: Oct/26/2014
 
 Data Product Prototype: Anti-vice Savings Calculator
 ========================================================
